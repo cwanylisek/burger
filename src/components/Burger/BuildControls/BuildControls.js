@@ -23,7 +23,8 @@ const BuildControls = (props) => (
     ))}
     <button
       className={classes.OrderButton}
-      disabled={!props.purchasable}>ZAMOW ORDER</button>
+      disabled={!props.purchasable}
+      onClick={props.ordered}>ZAMOW ORDER</button>
   </div>
 );
 
