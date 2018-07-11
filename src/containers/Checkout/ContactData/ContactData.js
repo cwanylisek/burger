@@ -18,17 +18,14 @@ class ContactData extends Component {
           value: ''
         },
         street: {
-            name: {
               elementType: 'input',
               elementConfig: {
                 type: 'text',
-                placeholder: 'street'
+                placeholder: 'Street'
               },
               value: ''
             },
-          },
         zipCode: {
-            name: {
               elementType: 'input',
               elementConfig: {
                 type: 'text',
@@ -36,9 +33,7 @@ class ContactData extends Component {
               },
               value: ''
             },
-          },
         country: {
-            name: {
               elementType: 'input',
               elementConfig: {
                 type: 'text',
@@ -46,9 +41,7 @@ class ContactData extends Component {
               },
               value: ''
             },
-          },
         email: {
-            name: {
               elementType: 'input',
               elementConfig: {
                 type: 'email',
@@ -56,7 +49,6 @@ class ContactData extends Component {
               },
               value: ''
             },
-          },
         deliveryMethod: {
               elementType: 'select',
               elementConfig: {
@@ -74,9 +66,14 @@ class ContactData extends Component {
   orderHandler = (event) => {
     event.preventDefault();
     this.setState({loading: true});
+    const formData = {};
+    for (let formelementIdentifier in this.state.orderForm) {
+      formData[formelementIdentifier] = this.state.orderForm[formelementIdentifier].value;
+    }
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.totalPrice,
+      price: this.props.price,
+      orderData: formData
     }
     axios.post('/orders.json', order)
         .then(response => {
@@ -98,7 +95,6 @@ class ContactData extends Component {
     }
     let form = (
       <form>
-        <Input elementType="..." elementConfig="..." value="..." />
         {formElementsArray.map(formElement => (
           <Input
             key={formElement.id}
